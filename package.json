@@ -1,0 +1,31 @@
+{
+  "name": "prismagram",
+  "version": "1.0.0",
+  "description": "Instrgram clone with prisma + graphql + react native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server:dev": "nodemon --exec ts-node src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pleed0215/prismagram.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pleed0215/prismagram/issues"
+  },
+  "homepage": "https://github.com/pleed0215/prismagram#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "graphql-yoga": "^1.18.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-typescript": "^7.12.1",
+    "nodemon": "^2.0.6",
+    "typescript": "^4.0.5"
+  }
+}

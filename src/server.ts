@@ -7,29 +7,34 @@ import schema from "./schema";
 import { PrismaClient } from "@prisma/client";
 const PORT = process.env.PORT || 4000;
 
-const server = new GraphQLServer({ schema });
+const prisma = new PrismaClient();
+const server = new GraphQLServer({ schema, context: { prisma } });
 
 server.express.use(logger("dev"));
 
-const prisma = new PrismaClient();
-
 async function main() {
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
-      name: "Alice",
-      email: "alice@prisma.io",
-      posts: {
-        create: { title: "Hello World" },
-      },
+      email: "pleed0215@bizmeka.com",
+      firstName: "Bbang deok",
+      lastName: "Lee",
       profile: {
-        create: { bio: "I like turtles" },
+        create: {
+          bio: "Hello jjj!",
+        },
       },
     },
+  });
+
+  await prisma.user.update({
+    where: { email: "pleed0215@gmail.com" },
+    data: { following: { connect: { email: "pleed0215@bizmeka.com" } } },
   });
   const allUsers = await prisma.user.findMany({
     include: {
       posts: true,
       profile: true,
+      followedBy: true,
     },
   });
   console.dir(allUsers, { depth: null });
@@ -43,6 +48,6 @@ main()
     await prisma.$disconnect();
   });
 
-server.start({ port: PORT }, () =>
+/*server.start({ port: PORT }, () =>
   console.log(`Server start with httP://127.0.0.1:${PORT}.`)
-);
+);*/

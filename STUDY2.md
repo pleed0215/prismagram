@@ -21,3 +21,14 @@ const allResolvers = fileLoader(path.join(__dirname, "/api/**/*.js"));
 ```
 
 - api folder 밑에는 resolver가 아닌 js 파일을 두면 안된다.
+
+# Prisma
+
+many-to-may self relation
+[Self relation] (https://www.prisma.io/docs/concepts/components/prisma-schema/relations#self-relations)
+
+schema를 db에 반영하려면
+prisma db push --preview-feature
+
+schema 변경 시 typescript error가 나오는데, 이를 막기 위해서는
+prisma generate 해줘야 한다.

@@ -7,10 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model Post {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   title     String
+  location  String
+  likes     Like[]
+  comments  Comment[]
   content   String?
   published Boolean  @default(false)
   authorId  Int
@@ -29,7 +33,36 @@ model Profile {
 model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique
-  name    String?
+  firstName    String?
+  lastName String?
   posts   Post[]
+  likes   Like[]
+  comments Comment[]
   profile Profile?
+  followedBy User[] @relation("UserFollows", references: [id])
+  following User[] @relation("UserFollows", references: [id])
+  //@@id([name, lastName])
+  //@@unique([name])
+  // @default(now()), @default(uuid())
+}
+
+
+model Like {
+  id      Int      @id @default(autoincrement())
+  user    User
+  post    Post
+}
+
+model Comment {
+  id      Int      @id @default(autoincrement())
+  text    String
+  user    User
+  post    Post    @relation(fields: [postId], references: [id])
+  postId  Int
+}
+
+model File {
+  id      Int       @id @default(autoincrement())
+  url     String
+  post    Post
 }

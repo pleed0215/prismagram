@@ -1,0 +1,13 @@
+type User {
+  id: Int!
+  email: String!
+  firstName: String!
+  lastName: String!
+  posts: [Post!]
+  likes: [Like!]
+  comments: [Comment!]
+  profile: Profile!
+  followedBy: [User!]
+  following: [User!]
+  rooms: [Message!]
+}
